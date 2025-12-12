@@ -4,9 +4,25 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
+import AdminPanel from '@/components/AdminPanel';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [programs, setPrograms] = useState([
+    { id: 1, title: 'Утреннее шоу', time: '08:00', category: 'Развлечения', duration: '2 часа', isLive: true },
+    { id: 2, title: 'Новости дня', time: '12:00', category: 'Новости', duration: '30 мин', isLive: false },
+    { id: 3, title: 'Документальный час', time: '15:00', category: 'Документальное', duration: '1 час', isLive: false },
+    { id: 4, title: 'Вечерний эфир', time: '20:00', category: 'Аналитика', duration: '1.5 часа', isLive: false },
+  ]);
+  const [news, setNews] = useState([
+    { id: 1, title: 'Премьера нового сезона "Утреннего шоу"', date: '15 декабря 2025', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
+    { id: 2, title: 'Интервью с министром культуры', date: '14 декабря 2025', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
+    { id: 3, title: 'Специальный репортаж о событиях года', date: '13 декабря 2025', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
+  ]);
+  const [adBlocks, setAdBlocks] = useState([
+    { id: 1, type: 'sponsor' as const, title: 'Генеральный спонсор', company: 'ООО "Партнёр"', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
+    { id: 2, type: 'ad' as const, title: 'Рекламный блок', company: 'Специальное предложение', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
+  ]);
 
   const navItems = [
     { id: 'home', label: 'Главная', icon: 'Home' },
@@ -15,24 +31,6 @@ const Index = () => {
     { id: 'news', label: 'Новости', icon: 'Newspaper' },
     { id: 'about', label: 'О канале', icon: 'Info' },
     { id: 'contacts', label: 'Контакты', icon: 'Phone' },
-  ];
-
-  const programs = [
-    { id: 1, title: 'Утреннее шоу', time: '08:00', category: 'Развлечения', duration: '2 часа', isLive: true },
-    { id: 2, title: 'Новости дня', time: '12:00', category: 'Новости', duration: '30 мин', isLive: false },
-    { id: 3, title: 'Документальный час', time: '15:00', category: 'Документальное', duration: '1 час', isLive: false },
-    { id: 4, title: 'Вечерний эфир', time: '20:00', category: 'Аналитика', duration: '1.5 часа', isLive: false },
-  ];
-
-  const news = [
-    { id: 1, title: 'Премьера нового сезона "Утреннего шоу"', date: '15 декабря 2025', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
-    { id: 2, title: 'Интервью с министром культуры', date: '14 декабря 2025', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
-    { id: 3, title: 'Специальный репортаж о событиях года', date: '13 декабря 2025', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
-  ];
-
-  const adBlocks = [
-    { id: 1, type: 'sponsor', title: 'Генеральный спонсор', company: 'ООО "Партнёр"', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
-    { id: 2, type: 'ad', title: 'Рекламный блок', company: 'Специальное предложение', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
   ];
 
   return (
@@ -486,6 +484,15 @@ const Index = () => {
           </div>
         </div>
       </footer>
+
+      <AdminPanel
+        programs={programs}
+        news={news}
+        adBlocks={adBlocks}
+        onUpdatePrograms={setPrograms}
+        onUpdateNews={setNews}
+        onUpdateAdBlocks={setAdBlocks}
+      />
     </div>
   );
 };
