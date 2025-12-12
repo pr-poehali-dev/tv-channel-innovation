@@ -35,16 +35,32 @@ interface AdBlock {
   image: string;
 }
 
+interface ContactInfo {
+  address: string;
+  phone: string;
+  email: string;
+}
+
+interface AboutInfo {
+  title: string;
+  description: string;
+  mainText: string;
+}
+
 interface AdminPanelProps {
   programs: Program[];
   news: NewsItem[];
   adBlocks: AdBlock[];
+  contactInfo: ContactInfo;
+  aboutInfo: AboutInfo;
   onUpdatePrograms: (programs: Program[]) => void;
   onUpdateNews: (news: NewsItem[]) => void;
   onUpdateAdBlocks: (adBlocks: AdBlock[]) => void;
+  onUpdateContactInfo: (info: ContactInfo) => void;
+  onUpdateAboutInfo: (info: AboutInfo) => void;
 }
 
-const AdminPanel = ({ programs, news, adBlocks, onUpdatePrograms, onUpdateNews, onUpdateAdBlocks }: AdminPanelProps) => {
+const AdminPanel = ({ programs, news, adBlocks, contactInfo, aboutInfo, onUpdatePrograms, onUpdateNews, onUpdateAdBlocks, onUpdateContactInfo, onUpdateAboutInfo }: AdminPanelProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [editingProgram, setEditingProgram] = useState<Program | null>(null);
   const [editingNews, setEditingNews] = useState<NewsItem | null>(null);
@@ -109,10 +125,12 @@ const AdminPanel = ({ programs, news, adBlocks, onUpdatePrograms, onUpdateNews, 
         </DialogHeader>
 
         <Tabs defaultValue="programs" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="programs">Передачи</TabsTrigger>
             <TabsTrigger value="news">Новости</TabsTrigger>
             <TabsTrigger value="ads">Реклама</TabsTrigger>
+            <TabsTrigger value="contacts">Контакты</TabsTrigger>
+            <TabsTrigger value="about">О канале</TabsTrigger>
           </TabsList>
 
           <TabsContent value="programs" className="space-y-4">
@@ -235,6 +253,77 @@ const AdminPanel = ({ programs, news, adBlocks, onUpdatePrograms, onUpdateNews, 
                 </DialogContent>
               </Dialog>
             )}
+          </TabsContent>
+
+          <TabsContent value="contacts" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg font-heading">Редактировать контакты</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="contact-address">Адрес</Label>
+                  <Input
+                    id="contact-address"
+                    value={contactInfo.address}
+                    onChange={(e) => onUpdateContactInfo({ ...contactInfo, address: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="contact-phone">Телефон</Label>
+                  <Input
+                    id="contact-phone"
+                    value={contactInfo.phone}
+                    onChange={(e) => onUpdateContactInfo({ ...contactInfo, phone: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="contact-email">Email</Label>
+                  <Input
+                    id="contact-email"
+                    type="email"
+                    value={contactInfo.email}
+                    onChange={(e) => onUpdateContactInfo({ ...contactInfo, email: e.target.value })}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="about" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg font-heading">Редактировать информацию о канале</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="about-title">Заголовок</Label>
+                  <Input
+                    id="about-title"
+                    value={aboutInfo.title}
+                    onChange={(e) => onUpdateAboutInfo({ ...aboutInfo, title: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="about-description">Краткое описание</Label>
+                  <Textarea
+                    id="about-description"
+                    value={aboutInfo.description}
+                    onChange={(e) => onUpdateAboutInfo({ ...aboutInfo, description: e.target.value })}
+                    rows={3}
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="about-maintext">Основной текст</Label>
+                  <Textarea
+                    id="about-maintext"
+                    value={aboutInfo.mainText}
+                    onChange={(e) => onUpdateAboutInfo({ ...aboutInfo, mainText: e.target.value })}
+                    rows={5}
+                  />
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
       </DialogContent>

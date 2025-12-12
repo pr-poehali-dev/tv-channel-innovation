@@ -23,6 +23,16 @@ const Index = () => {
     { id: 1, type: 'sponsor' as const, title: 'Генеральный спонсор', company: 'ООО "Партнёр"', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
     { id: 2, type: 'ad' as const, title: 'Рекламный блок', company: 'Специальное предложение', image: 'https://cdn.poehali.dev/projects/76073f5c-891a-4d8c-a163-9f4c7069d26c/files/ab7981d9-3782-48ed-9096-ece2037b4d60.jpg' },
   ]);
+  const [contactInfo, setContactInfo] = useState({
+    address: 'г. Москва, ул. Примерная, д. 123',
+    phone: '+7 (495) 123-45-67',
+    email: 'info@telekanal.ru',
+  });
+  const [aboutInfo, setAboutInfo] = useState({
+    title: 'О телеканале',
+    description: 'Наш телеканал — это современная медиаплатформа, которая предлагает качественный и разнообразный контент для широкой аудитории.',
+    mainText: 'Мы специализируемся на создании информационных, развлекательных и документальных программ, которые интересны и актуальны для зрителей всех возрастов.',
+  });
 
   const navItems = [
     { id: 'home', label: 'Главная', icon: 'Home' },
@@ -329,7 +339,7 @@ const Index = () => {
 
         {activeSection === 'about' && (
           <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
-            <h1 className="text-4xl font-heading font-bold mb-6">О телеканале</h1>
+            <h1 className="text-4xl font-heading font-bold mb-6">{aboutInfo.title}</h1>
             <Card>
               <CardContent className="p-8 space-y-6">
                 <div className="aspect-video bg-muted rounded-lg overflow-hidden">
@@ -341,10 +351,10 @@ const Index = () => {
                 </div>
                 <div className="prose prose-lg max-w-none">
                   <p className="text-lg">
-                    Наш телеканал — это современная медиаплатформа, которая предлагает качественный и разнообразный контент для широкой аудитории.
+                    {aboutInfo.description}
                   </p>
                   <p>
-                    Мы специализируемся на создании информационных, развлекательных и документальных программ, которые интересны и актуальны для зрителей всех возрастов.
+                    {aboutInfo.mainText}
                   </p>
                   <h3 className="font-heading font-bold text-2xl mt-8 mb-4">Наши ценности</h3>
                   <div className="grid md:grid-cols-3 gap-4 not-prose">
@@ -388,14 +398,14 @@ const Index = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p>г. Москва, ул. Примерная, д. 123</p>
+                  <p>{contactInfo.address}</p>
                   <div className="flex items-center gap-2">
                     <Icon name="Phone" size={20} className="text-primary" />
-                    <span>+7 (495) 123-45-67</span>
+                    <span>{contactInfo.phone}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Icon name="Mail" size={20} className="text-primary" />
-                    <span>info@telekanal.ru</span>
+                    <span>{contactInfo.email}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -482,8 +492,8 @@ const Index = () => {
             <div>
               <h3 className="font-heading font-semibold mb-4">Контакты</h3>
               <ul className="space-y-2 text-sm">
-                <li className="text-muted-foreground">+7 (495) 123-45-67</li>
-                <li className="text-muted-foreground">info@telekanal.ru</li>
+                <li className="text-muted-foreground">{contactInfo.phone}</li>
+                <li className="text-muted-foreground">{contactInfo.email}</li>
               </ul>
             </div>
           </div>
@@ -497,9 +507,13 @@ const Index = () => {
         programs={programs}
         news={news}
         adBlocks={adBlocks}
+        contactInfo={contactInfo}
+        aboutInfo={aboutInfo}
         onUpdatePrograms={setPrograms}
         onUpdateNews={setNews}
         onUpdateAdBlocks={setAdBlocks}
+        onUpdateContactInfo={setContactInfo}
+        onUpdateAboutInfo={setAboutInfo}
       />
     </div>
   );
