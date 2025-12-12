@@ -37,9 +37,13 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center">
-          <div className="flex items-center gap-2">
-            <Icon name="Tv" size={32} className="text-primary" />
-            <span className="text-2xl font-heading font-bold">Телеканал</span>
+          <div className="flex items-center gap-3">
+            <img 
+              src="https://cdn.poehali.dev/files/1764727791419.png" 
+              alt="Фокус+" 
+              className="h-10 w-auto"
+            />
+            <span className="text-2xl font-heading font-bold">Фокус+</span>
           </div>
           <nav className="ml-auto flex items-center gap-1">
             {navItems.map((item) => (
@@ -448,8 +452,12 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Icon name="Tv" size={28} className="text-primary" />
-                <span className="text-xl font-heading font-bold">Телеканал</span>
+                <img 
+                  src="https://cdn.poehali.dev/files/1764727791419.png" 
+                  alt="Фокус+" 
+                  className="h-7 w-auto"
+                />
+                <span className="text-xl font-heading font-bold">Фокус+</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Качественное телевидение для всей семьи
@@ -480,7 +488,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            © 2025 Телеканал. Все права защищены.
+            © 2025 Фокус+. Все права защищены.
           </div>
         </div>
       </footer>
